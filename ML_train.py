@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+
 
 import pandas as pd
 import numpy as np
@@ -11,15 +10,17 @@ import matplotlib.pyplot as plt
 
 
 #Load data
-feature_vector = pd.read_csv("feature_vector.csv")[["asin", "Avg Summary Sentiment Score", 
+feature_vector = pd.read_csv("feature_vector_verified_newstops.csv")[["asin", "Avg Summary Sentiment Score", 
                                                   "Avg Review Sentiment Score"]]
-products = pd.read_json("product_training.json")
+products = pd.read_csv("Toys_and_Gamesproduct_training.csv")
 
 #combined feature vector with awesomeness score
 feature_vector = feature_vector.merge(products, on="asin")
 
 #model scores
 model_scores = {}
+model_precision = {}
+model_recall = {}
 
 
 """
@@ -33,8 +34,18 @@ scores = cross_val_score(clf,
                         feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
                         feature_vector["awesomeness"],
                         cv=10, scoring="f1")
+precision = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="precision")
+recall = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="recall")
 
 model_scores[name] = scores
+model_precision[name] = precision
+model_recall[name] = recall
 
 
 """Guassian Naive Bayes: 
@@ -48,7 +59,18 @@ scores = cross_val_score(clf,
                         feature_vector["awesomeness"],
                         cv=10, scoring="f1")
 
+precision = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="precision")
+recall = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="recall")
+
 model_scores[name] = scores
+model_precision[name] = precision
+model_recall[name] = recall
 
 
 """Decision Trees:
@@ -62,7 +84,18 @@ scores = cross_val_score(clf,
                         feature_vector["awesomeness"],
                         cv=10, scoring="f1")
 
+precision = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="precision")
+recall = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="recall")
+
 model_scores[name] = scores
+model_precision[name] = precision
+model_recall[name] = recall
 
 
 """SVC:
@@ -76,7 +109,18 @@ scores = cross_val_score(clf,
                         feature_vector["awesomeness"],
                         cv=10, scoring="f1")
 
+precision = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="precision")
+recall = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="recall")
+
 model_scores[name] = scores
+model_precision[name] = precision
+model_recall[name] = recall
 
 
 """Logistic Regression:
@@ -90,7 +134,18 @@ scores = cross_val_score(clf,
                         feature_vector["awesomeness"],
                         cv=10, scoring="f1")
 
+precision = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="precision")
+recall = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="recall")
+
 model_scores[name] = scores
+model_precision[name] = precision
+model_recall[name] = recall
 
 
 """Random Forest:
@@ -104,7 +159,18 @@ scores = cross_val_score(clf,
                         feature_vector["awesomeness"],
                         cv=10, scoring="f1")
 
+precision = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="precision")
+recall = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="recall")
+
 model_scores[name] = scores
+model_precision[name] = precision
+model_recall[name] = recall
 
 
 """Gradient Boosting:
@@ -118,7 +184,18 @@ scores = cross_val_score(clf,
                         feature_vector["awesomeness"],
                         cv=10, scoring="f1")
 
+precision = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="precision")
+recall = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="recall")
+
 model_scores[name] = scores
+model_precision[name] = precision
+model_recall[name] = recall
 
 
 
@@ -132,7 +209,18 @@ scores = cross_val_score(clf,
                         feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
                         feature_vector["awesomeness"],
                         cv=10, scoring="f1")
+precision = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="precision")
+recall = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="recall")
+
 model_scores[name] = scores
+model_precision[name] = precision
+model_recall[name] = recall
 
 
 
@@ -146,7 +234,18 @@ scores = cross_val_score(clf,
                         feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
                         feature_vector["awesomeness"],
                         cv=10, scoring="f1")
+precision = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="precision")
+recall = cross_val_score(clf, 
+                        feature_vector[["Avg Summary Sentiment Score","Avg Review Sentiment Score"]], 
+                        feature_vector["awesomeness"],
+                        cv=10, scoring="recall")
+
 model_scores[name] = scores
+model_precision[name] = precision
+model_recall[name] = recall
 
 
 mean = []
@@ -166,7 +265,7 @@ for i in range(len(labels)):
     ax1.bar(i, mean[i], align='center', color = 'royalblue', alpha=1,zorder=3)
 
 ax1.set(
-      title='Comparison of Classifier Models',
+      title='Comparison of Classifier Models: F1',
       ylabel='Mean F1 Score for 10-fold Cross Validation')
 
 ax1.yaxis.grid(True, linestyle='-', which='major', color='black',
@@ -175,5 +274,66 @@ ax1.yaxis.grid(True, linestyle='-', which='major', color='black',
 plt.xticks(x_pos, labels, rotation= 90)
 plt.ylim([0,1])
 plt.yticks([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
-plt.savefig("Accuracy Comparisons")
+plt.savefig("Accuracy Comparisons.png")
+
+mean = []
+std_dev = []
+labels = []
+
+for key in model_precision:
+    labels.append(key)
+    mean.append(model_precision[key].mean())
+    std_dev.append(model_precision[key].std())
+    
+
+x_pos = np.arange(len(labels))
+fig, ax1 = plt.subplots(figsize=(10, 10))
+
+for i in range(len(labels)):
+    ax1.bar(i, mean[i], align='center', color = 'royalblue', alpha=1,zorder=3)
+
+ax1.set(
+      title='Comparison of Classifier Models: Precision',
+      ylabel='Mean Precision Score for 10-fold Cross Validation')
+
+ax1.yaxis.grid(True, linestyle='-', which='major', color='black',
+               alpha=0.5, zorder=0)
+
+plt.xticks(x_pos, labels, rotation= 90)
+plt.ylim([0,1])
+plt.yticks([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+plt.savefig("Precision Comparisons.png")
+
+mean = []
+std_dev = []
+labels = []
+
+for key in model_recall:
+    labels.append(key)
+    mean.append(model_recall[key].mean())
+    std_dev.append(model_recall[key].std())
+    
+
+x_pos = np.arange(len(labels))
+fig, ax1 = plt.subplots(figsize=(10, 10))
+
+for i in range(len(labels)):
+    ax1.bar(i, mean[i], align='center', color = 'royalblue', alpha=1,zorder=3)
+
+ax1.set(
+      title='Comparison of Classifier Models: Recall',
+      ylabel='Mean Recall Score for 10-fold Cross Validation')
+
+ax1.yaxis.grid(True, linestyle='-', which='major', color='black',
+               alpha=0.5, zorder=0)
+
+plt.xticks(x_pos, labels, rotation= 90)
+plt.ylim([0,1])
+plt.yticks([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+plt.savefig("Recall Comparisons.png")
+
+
+#print(model_scores)
+#print(model_precision)
+#print(model_recall)
 
